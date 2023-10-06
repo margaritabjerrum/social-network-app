@@ -23,7 +23,7 @@ export class SignUp {
     const authObjectId: ObjectId = new ObjectId();
     const userObjectId: ObjectId = new ObjectId();
     const uId = `${Helpers.generateRandomIntegers(12)}`;
-    const authData: IAuthDocument = SignUp.prototype.singupData({
+    const authData: IAuthDocument = SignUp.prototype.signupData({
       _id: authObjectId,
       uId,
       username,
@@ -39,7 +39,7 @@ export class SignUp {
     res.status(HTTP_STATUS.CREATED).json({ message: 'User created successsfully', authData });
   }
 
-  private singupData(data: ISignUpData): IAuthDocument {
+  private signupData(data: ISignUpData): IAuthDocument {
     const { _id, username, email, uId, password, avatarColor } = data;
     return {
       _id,
