@@ -6,7 +6,7 @@ dotenv.config({});
 
 class Config {
   public DATABASE_URL: string | undefined;
-  public JWT_TOKENL: string | undefined;
+  public JWT_TOKEN: string | undefined;
   public NODE_ENV: string | undefined;
   public SECTERT_KEY_ONE: string | undefined;
   public SECTERT_KEY_TWO: string | undefined;
@@ -20,7 +20,7 @@ class Config {
 
   constructor() {
     this.DATABASE_URL = process.env.DATABASE_URL || this.DEFAULT_DATABASE_URL;
-    this.JWT_TOKENL = process.env.JWT_TOKENL || '1234';
+    this.JWT_TOKEN = process.env.JWT_TOKEN || '1234';
     this.NODE_ENV = process.env.NODE_ENV || '';
     this.SECTERT_KEY_ONE = process.env.SECTERT_KEY_ONE || '';
     this.SECTERT_KEY_TWO = process.env.SECTERT_KEY_TWO || '';
