@@ -1,4 +1,3 @@
-
 export class Helpers {
   static firstLetterUppercase(str: string): string {
     const valueString = str.toLowerCase();

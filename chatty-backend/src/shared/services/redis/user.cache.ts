@@ -5,7 +5,6 @@ import { config } from '@root/config';
 import { ServerError } from '@global/helpers/error-handler';
 import { Helpers } from '@global/helpers/helpers';
 
-
 const log: Logger = config.createLogger('redisConnection');
 
 export class UserCache extends BaseCache {
@@ -80,7 +79,7 @@ export class UserCache extends BaseCache {
       'bgImageVersion',
       `${bgImageVersion}`,
       'bgImageId',
-      `${bgImageId}`,
+      `${bgImageId}`
     ];
     const dataToSave: string[] = [...firstList, ...secondList, ...thirdList];
 
@@ -88,7 +87,7 @@ export class UserCache extends BaseCache {
       if (!this.client.isOpen) {
         await this.client.connect();
       }
-      await this.client.ZADD('user', { score: parseInt(userId, 10), value: `${key}`});
+      await this.client.ZADD('user', { score: parseInt(userId, 10), value: `${key}` });
       await this.client.HSET(`users:${key}`, dataToSave);
     } catch (error) {
       log.error(error);
@@ -102,7 +101,7 @@ export class UserCache extends BaseCache {
         await this.client.connect();
       }
 
-      const response: IUserDocument = await this.client.HGETALL(`users:${userUId}`) as unknown as IUserDocument;
+      const response: IUserDocument = (await this.client.HGETALL(`users:${userUId}`)) as unknown as IUserDocument;
       response.createdAt = new Date(Helpers.parseJson(`${response.createdAt}`));
       response.postsCount = Helpers.parseJson(`${response.postsCount}`);
       response.blocked = Helpers.parseJson(`${response.blocked}`);
