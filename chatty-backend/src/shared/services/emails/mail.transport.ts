@@ -32,7 +32,7 @@ class MailTransport {
       secure: false,
       auth: {
         user: config.SENDER_EMAIL!,
-        pass:config.SENDER_EMAIL_PASSWORD!
+        pass: config.SENDER_EMAIL_PASSWORD!
       }
     });
 
@@ -53,7 +53,6 @@ class MailTransport {
   }
 
   private async productionEmailSender(receiverEmail: string, subject: string, body: string): Promise<void> {
-
     const mailOptions: IMailOptions = {
       from: `Chatty App <${config.SENDER_EMAIL}>`,
       to: receiverEmail,

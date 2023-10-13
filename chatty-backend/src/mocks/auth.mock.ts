@@ -16,51 +16,51 @@ export const authMockResponse = (): Response => {
 };
 
 export interface IJWT {
-  jwt?: string
+  jwt?: string;
 }
 
 export interface IAuthMock {
-    _id?: string;
-    username?: string;
-    email?: string;
-    uId?: string;
-    password?: string;
-    avatarColor?: string;
-    avatarImage?: string;
-    createdAt?: Date | string;
-    currentPassword?: string;
-    newPassword?: string;
-    confirmPassword?: string;
-    quote?: string;
-    work?: string;
-    school?: string;
-    location?: string;
-    facebook?: string;
-    instagram?: string;
-    twitter?: string;
-    youtube?: string;
-    messages?: boolean;
-    reactions?: boolean;
-    comments?: boolean;
-    follows?: boolean;
-  }
+  _id?: string;
+  username?: string;
+  email?: string;
+  uId?: string;
+  password?: string;
+  avatarColor?: string;
+  avatarImage?: string;
+  createdAt?: Date | string;
+  currentPassword?: string;
+  newPassword?: string;
+  confirmPassword?: string;
+  quote?: string;
+  work?: string;
+  school?: string;
+  location?: string;
+  facebook?: string;
+  instagram?: string;
+  twitter?: string;
+  youtube?: string;
+  messages?: boolean;
+  reactions?: boolean;
+  comments?: boolean;
+  follows?: boolean;
+}
 
-  export const authUserPayload: AuthPayload = {
-    userId: '60263f14648fed5246e322d9',
-    uId: '1621613119252066',
-    username: 'Danny',
-    email: 'danny@test.com',
-    avatarColor: '#9c27b0',
-    iat: 12345
-  };
+export const authUserPayload: AuthPayload = {
+  userId: '60263f14648fed5246e322d9',
+  uId: '1621613119252066',
+  username: 'Danny',
+  email: 'danny@test.com',
+  avatarColor: '#9c27b0',
+  iat: 12345
+};
 
-  export const authMock = {
-    _id: '60263f14648fed5246e322d3',
-    uId: '1621613119252066',
-    username: 'Danny',
-    email: 'danny@test.com',
-    avatarColor: '#9c27b0',
-    createdAt: '2022-08-31T07:42:24.451Z',
-    save: () => {},
-    comparePassword: () => false
-  } as unknown as IAuthDocument;
+export const authMock = {
+  _id: '60263f14648fed5246e322d3',
+  uId: '1621613119252066',
+  username: 'Danny',
+  email: 'danny@test.com',
+  avatarColor: '#9c27b0',
+  createdAt: '2022-08-31T07:42:24.451Z',
+  save: () => {},
+  comparePassword: () => false
+} as unknown as IAuthDocument;
