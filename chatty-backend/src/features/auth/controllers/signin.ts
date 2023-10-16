@@ -14,7 +14,7 @@ export class SignIn {
   @joiValidation(loginSchema)
   public async read(req: Request, res: Response): Promise<void> {
     const { username, password } = req.body;
-    const existingUser: IAuthDocument = await authService.getAuthUSerByUsername(username);
+    const existingUser: IAuthDocument = await authService.getAuthUserByUsername(username);
     if (!existingUser) {
       throw new BadRequestError('Invalid credentials');
     }
@@ -48,6 +48,6 @@ export class SignIn {
       createdAt: existingUser!.createdAt
     } as IUserDocument;
 
-    res.status(HTTP_STATUS.OK).json({ message: 'User login successsfully', user: userDocument, token: userJwt });
+    res.status(HTTP_STATUS.OK).json({ message: 'User login successfully', user: userDocument, token: userJwt });
   }
 }
