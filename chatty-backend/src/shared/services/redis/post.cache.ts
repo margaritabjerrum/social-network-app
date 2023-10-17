@@ -5,7 +5,6 @@ import { ServerError } from '@global/helpers/error-handler';
 import { IPostDocument, IReactions, ISavePostToCache } from '@post/interfaces/post.interface';
 import { Helpers } from '@global/helpers/helpers';
 import { RedisCommandRawReply } from '@redis/client/dist/lib/commands';
-import { postRoutes } from '@post/routes/post.routes';
 
 const log: Logger = config.createLogger('postCache');
 
