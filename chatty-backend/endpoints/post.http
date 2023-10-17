@@ -9,9 +9,9 @@ Accept: application/json
 withCredentials: true
 
 {
-  "post": "This is my second post",
+  "post": "This is my test post",
   "bgColor": "#4aa1f3",
-  "privacy": "Private",
+  "privacy": "Public",
   "gifUrl": "",
   "profilePicture": "https://res.cloudinary.com/dux3dgz8f/image/upload/v1696862384/652410af86101ec8faa15dde",
   "feelings": ""
