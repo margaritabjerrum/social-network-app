@@ -100,17 +100,17 @@ export class PostCache extends BaseCache {
         await this.client.connect();
       }
 
-      const reply: string[] = await this.client.ZRANGE(key, start, end, { REV: true });
+      const reply: string[] = await this.client.sendCommand(['ZREVRANGE', `${key}`, `${start}`, `${end}`]);
       const multi: ReturnType<typeof this.client.multi> = this.client.multi();
-      for (const value of reply) {
+      for(const value of reply) {
         multi.HGETALL(`posts:${value}`);
       }
       const replies: PostCacheMultiType = (await multi.exec()) as PostCacheMultiType;
       const postReplies: IPostDocument[] = [];
-      for (const post of replies as IPostDocument[]) {
+      for(const post of replies as IPostDocument[]) {
         post.commentsCount = Helpers.parseJson(`${post.commentsCount}`) as number;
         post.reactions = Helpers.parseJson(`${post.reactions}`) as IReactions;
-        post.createdAt = new Date(Helpers.parseJson(`${post.commentsCount}`)) as Date;
+        post.createdAt = new Date(Helpers.parseJson(`${post.createdAt}`)) as Date;
         postReplies.push(post);
       }
 
@@ -140,26 +140,25 @@ export class PostCache extends BaseCache {
         await this.client.connect();
       }
 
-      const reply: string[] = await this.client.ZRANGE(key, start, end, { REV: true });
+      const reply: string[] = await this.client.sendCommand(['ZREVRANGE', `${key}`, `${start}`, `${end}`]);
       const multi: ReturnType<typeof this.client.multi> = this.client.multi();
-      for (const value of reply) {
+      for(const value of reply) {
         multi.HGETALL(`posts:${value}`);
       }
-      const replies: PostCacheMultiType = (await multi.exec()) as PostCacheMultiType;
+      const replies: PostCacheMultiType = await multi.exec() as PostCacheMultiType;
       const postWithImages: IPostDocument[] = [];
-      for (const post of replies as IPostDocument[]) {
+      for(const post of replies as IPostDocument[]) {
         if ((post.imgId && post.imgVersion) || post.gifUrl) {
           post.commentsCount = Helpers.parseJson(`${post.commentsCount}`) as number;
           post.reactions = Helpers.parseJson(`${post.reactions}`) as IReactions;
-          post.createdAt = new Date(Helpers.parseJson(`${post.commentsCount}`)) as Date;
+          post.createdAt = new Date(Helpers.parseJson(`${post.createdAt}`)) as Date;
           postWithImages.push(post);
         }
       }
-
       return postWithImages;
     } catch (error) {
       log.error(error);
-      throw new ServerError('Server error. Try again');
+      throw new ServerError('Server error. Try again.');
     }
   }
 
@@ -168,15 +167,15 @@ export class PostCache extends BaseCache {
       if (!this.client.isOpen) {
         await this.client.connect();
       }
-
+      //the ZRANGE REV will need to be changed wehn we need to use this
       const reply: string[] = await this.client.ZRANGE(key, uId, uId, { REV: true, BY: 'SCORE' });
       const multi: ReturnType<typeof this.client.multi> = this.client.multi();
-      for (const value of reply) {
+      for(const value of reply) {
         multi.HGETALL(`posts:${value}`);
       }
       const replies: PostCacheMultiType = (await multi.exec()) as PostCacheMultiType;
       const postReplies: IPostDocument[] = [];
-      for (const post of replies as IPostDocument[]) {
+      for(const post of replies as IPostDocument[]) {
         post.commentsCount = Helpers.parseJson(`${post.commentsCount}`) as number;
         post.reactions = Helpers.parseJson(`${post.reactions}`) as IReactions;
         post.createdAt = new Date(Helpers.parseJson(`${post.commentsCount}`)) as Date;
