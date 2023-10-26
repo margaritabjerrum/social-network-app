@@ -1,0 +1,44 @@
+@baseUrl = http://localhost:5000
+
+@urlPath= api/v1
+
+###
+POST {{baseUrl}}/{{urlPath}}/post/reaction
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "userTo": "652d3f1ff50d2ce056967ab4",
+  "postId": "653a60d7964918ca2b9ba298",
+  "type": "wow",
+  "previousReaction": "",
+  "postReactions": {"like": 0,"love": 0,"happy": 0,"wow": 1,"sad": 0,"angry": 0},
+  "profilePicture": "https://res.cloudinary.com/dux3dgz8f/image/upload/v1697464095/652d3f1ff50d2ce056967ab4"
+}
+
+###
+DELETE {{baseUrl}}/{{urlPath}}/post/reaction/653915eb4f44458e1968b875/happy/{"like": 0,"love": 0,"happy": 0,"wow": 0,"sad": 0,"angry": 0}
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}
+
+###
+GET {{baseUrl}}/{{urlPath}}/post/reactions/653915eb4f44458e1968b875
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+###
+GET {{baseUrl}}/{{urlPath}}/post/single/reaction/username/Danny/653915eb4f44458e1968b875
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+###
+GET {{baseUrl}}/{{urlPath}}/post/reactions/username/Danny
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
