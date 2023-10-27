@@ -3,11 +3,11 @@ import { ObjectId } from 'mongodb';
 import HTTP_STATUS from 'http-status-codes';
 import { joiValidation } from '@global/decorators/joi-validation.decorators';
 import { addCommentSchema } from '@comment/schemes/comment.schemes';
-import { CommentCahce } from '@service/redis/comment.cache';
+import { CommentCache } from '@service/redis/comment.cache';
 import { ICommentDocument, ICommentJob } from '@comment/interfaces/comment.interface';
 import { commentQueue } from '@service/queues/comment.queue';
 
-const commentCache: CommentCahce = new CommentCahce();
+const commentCache: CommentCache = new CommentCache();
 
 export class Add {
   @joiValidation(addCommentSchema)
@@ -32,7 +32,7 @@ export class Add {
       username: req.currentUser!.username,
       comment: commentData
     };
-    commentQueue.addcommentJob('addCommentToDB', databaseCommentData);
+    commentQueue.addCommentJob('addCommentToDB', databaseCommentData);
 
     res.status(HTTP_STATUS.OK).json({ message: 'Comment created successfully' });
   }

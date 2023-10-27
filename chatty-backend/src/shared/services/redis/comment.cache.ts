@@ -8,7 +8,7 @@ import { ICommentDocument, ICommentNameList } from '@comment/interfaces/comment.
 
 const log: Logger = config.createLogger('postCache');
 
-export class CommentCahce extends BaseCache {
+export class CommentCache extends BaseCache {
   constructor() {
     super('commentsCache');
   }
@@ -29,7 +29,7 @@ export class CommentCahce extends BaseCache {
     }
   }
 
-  public async getCommentsToCache(postId: string): Promise<ICommentDocument[]> {
+  public async getCommentsFromCache(postId: string): Promise<ICommentDocument[]> {
     try {
       if (!this.client.isOpen) {
         await this.client.connect();
