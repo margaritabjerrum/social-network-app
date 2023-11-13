@@ -29,3 +29,19 @@ GET {{baseUrl}}/{{urlPath}}/user/followers/6548fc7d155215ec1cc6beeb
 Content-Type: application/json
 Accept: application/json
 withCredentials: true
+
+###
+PUT {{baseUrl}}/{{urlPath}}/user/block/6548fc7d155215ec1cc6beeb
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}
+
+###
+PUT {{baseUrl}}/{{urlPath}}/user/unblock/6548fc7d155215ec1cc6beeb
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{}
