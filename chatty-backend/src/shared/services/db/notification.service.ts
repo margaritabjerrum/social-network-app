@@ -38,13 +38,13 @@ class NotificationService {
     return notifications;
   }
 
-  // public async updateNotification(notificationId: string): Promise<void> {
-  //   await NotificationModel.updateOne({ _id: notificationId }, { $set: { read: true } }).exec();
-  // }
+  public async updateNotification(notificationId: string): Promise<void> {
+    await NotificationModel.updateOne({ _id: notificationId }, { $set: { read: true } }).exec();
+  }
 
-  // public async deleteNotification(notificationId: string): Promise<void> {
-  //   await NotificationModel.deleteOne({ _id: notificationId }).exec();
-  // }
+  public async deleteNotification(notificationId: string): Promise<void> {
+    await NotificationModel.deleteOne({ _id: notificationId }).exec();
+  }
 }
 
 export const notificationService: NotificationService = new NotificationService();
