@@ -52,7 +52,7 @@ class CommentService {
       emailQueue.addEmailJob('commentsEmail', {
         receiverEmail: response[2].email!,
         template,
-        subject: '[Chatty App] You have new comment on your post'
+        subject: '[Chatty App] You have a new comment on your post'
       });
     }
   }
