@@ -1,9 +1,11 @@
 import { ICommentDocument, ICommentJob, ICommentNameList, IQueryComment } from '@comment/interfaces/comment.interface';
 import { CommentsModel } from '@comment/models/comment.schema';
-import { INotificationDocument } from '@notification/interfaces/notification.interface';
+import { INotificationDocument, INotificationTemplate } from '@notification/interfaces/notification.interface';
 import { NotificationModel } from '@notification/models/notification.schema';
 import { IPostDocument } from '@post/interfaces/post.interface';
 import { PostModel } from '@post/models/post.schema';
+import { notificationTemplate } from '@service/emails/templates/notifications/notification-template';
+import { emailQueue } from '@service/queues/email.queue';
 import { UserCache } from '@service/redis/user.cache';
 import { socketIONotificationObject } from '@socket/notification';
 import { IUserDocument } from '@user/interfaces/user.interface';
@@ -41,13 +43,17 @@ class CommentService {
         reaction: ''
       });
       socketIONotificationObject.emit('insert notification', notifications, { userTo });
-      // const templateParams: INotificationTemplate = {
-      //   username: response[2].username!,
-      //   message: `${username} commented on your post.`,
-      //   header: 'Comment Notification'
-      // };
-      // const template: string = notificationTemplate.notificationMessageTemplate(templateParams);
-      // emailQueue.addEmailJob('commentsEmail', { receiverEmail: response[2].email!, template, subject: 'Post notification' });
+      const templateParams: INotificationTemplate = {
+        username: response[2].username!,
+        message: `${username} commented on your post.`,
+        header: 'Comment Notification'
+      };
+      const template: string = notificationTemplate.notificationMessageTemplate(templateParams);
+      emailQueue.addEmailJob('commentsEmail', {
+        receiverEmail: response[2].email!,
+        template,
+        subject: '[Chatty App] You have new comment on your post'
+      });
     }
   }
 
