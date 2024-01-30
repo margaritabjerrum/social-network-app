@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './Input.scss';
 
-const input = ({ name, type, value, className, labelText, placeholder, handleChange }) => {
+const input = ({ id, name, type, value, className, labelText, placeholder, handleChange }) => {
   return (
     <>
       <div className="form-row">
@@ -11,6 +12,7 @@ const input = ({ name, type, value, className, labelText, placeholder, handleCha
           </label>
         )}
         <input
+          id={id}
           name={name}
           type={type}
           value={value}
@@ -26,9 +28,10 @@ const input = ({ name, type, value, className, labelText, placeholder, handleCha
 
 input.propTypes = {
   name: PropTypes.string.isRequired,
-  labelText: PropTypes.string,
   type: PropTypes.string.isRequired,
-  value: PropTypes.string,
+  labelText: PropTypes.string,
+  id: PropTypes.string,
+  value: PropTypes.any,
   className: PropTypes.string,
   placeholder: PropTypes.string,
   handleChange: PropTypes.func
